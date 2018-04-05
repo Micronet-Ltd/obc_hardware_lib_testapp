@@ -31,29 +31,35 @@
             android:textSize="9dp" />
 
         <Button
-            android:layout_width="73dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="Clear Log"
             android:id="@+id/btnDeleteLog"
             android:textSize="9dp" />
         <Button
-            android:layout_width="73dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="Pause Log"
             android:id="@+id/btnPauseLog"
             android:textSize="9dp" />
         <Button
-            android:layout_width="73dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="Set RTC"
             android:id="@+id/btnSetRTC"
             android:textSize="9dp" />
         <Button
-            android:layout_width="73dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="Poweroff"
             android:id="@+id/btnPowerOff"
             android:textSize="9dp" />
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="LED cycle"
+            android:id="@+id/ledCycle"
+            android:textSize="9dp"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.micronet.mcontroltestapp.fragments;
 
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.micronet.mcontrol.MControl;
 import com.micronet.mcontroltestapp.Logger;
 import com.micronet.mcontroltestapp.Pair;
 import com.micronet.mcontroltestapp.R;
@@ -37,6 +39,7 @@ public class MControlFragment extends Fragment {
     private boolean deleteLog = false;
     private String filename = null;
     private MControlTextAdapter mctlAdapter;
+    private boolean ledCycling = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,18 +103,6 @@ public class MControlFragment extends Fragment {
         btnPowerOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
-                try{
-                    Process proc = Runtime.getRuntime()
-                            .exec(new String[] {"/bin/sh", "-c", "reboot -p" });
-
-                    proc.waitFor();
-                }
-                catch (Exception ex){
-                    ex.printStackTrace();
-                }
-                Toast.makeText(getContext(), "Device Power Off in 2 Seconds", Toast.LENGTH_SHORT).show();
-*/
                 Toast.makeText(getContext(), "Device via OS Power Off in 2 Seconds", Toast.LENGTH_SHORT).show();
                 //Shutdown using the OS
                 setSysPropPowerCtlShutdown();
@@ -123,7 +114,28 @@ public class MControlFragment extends Fragment {
             }
         });
 
-
+        final Button ledCycle = (Button) rootView.findViewById(R.id.ledCycle);
+        ledCycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ledCycling = !ledCycling;
+                final MControl mc = new MControl();
+                new Thread(new Runnable() {
+                    int hue = 0;
+                    @Override
+                    public void run() {
+                        while(ledCycling) {
+                            hue = (hue + 1) % 360;
+                            float[] nums = {hue + 0.0f, 1.0f, 1.0f};
+                            int colorInt = Color.HSVToColor(nums) | 0xff000000;
+                            mc.set_led_status(0, 255, colorInt);
+                            mc.set_led_status(1, 255, colorInt);
+                            mc.set_led_status(2, 255, colorInt);
+                        }
+                    }
+                }).start();
+            }
+        });
 
 
         return rootView;
