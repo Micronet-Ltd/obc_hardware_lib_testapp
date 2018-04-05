@@ -110,7 +110,7 @@ public class MControlTextAdapter extends BaseAdapter {
             Log.e(TAG, e.toString());
         }
 
-        String accelerometer = String.format ("X:%.4f Y:%.4f Z:%.4f", linear_acceleration[0], linear_acceleration[1], linear_acceleration[2]);
+        String accelerometer =  String.format ("%.4f %.4f %.4f", linear_acceleration[0], linear_acceleration[1], linear_acceleration[2]);
         String adc_cable_type = ADCs.ADC_CABLE_TYPE.getValue() + " mv";
         int[] rtc_cal = mc.get_rtc_cal_reg();
         String dig_rtc_cal_reg = String.valueOf(rtc_cal[0]);

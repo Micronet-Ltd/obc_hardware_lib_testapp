@@ -40,12 +40,13 @@ public class MControlFragment extends Fragment {
     private String filename = null;
     private MControlTextAdapter mctlAdapter;
     private boolean ledCycling = false;
+    View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_section_hardware, container, false);
+        rootView = inflater.inflate(R.layout.fragment_section_hardware, container, false);
 
         mctlAdapter = new MControlTextAdapter(getContext().getApplicationContext());
 
@@ -74,15 +75,7 @@ public class MControlFragment extends Fragment {
         btnPauseLogging.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pauseLog) {
-                    btnPauseLogging.setText("Pause Logging");
-                    saveLogHandler.postDelayed(saveLogRunnable, 0);
-
-                } else {
-                    btnPauseLogging.setText("Resume Logging");
-                    saveLogHandler.removeCallbacks(saveLogRunnable);
-                }
-                pauseLog = !pauseLog;
+                pauseLogging();
             }
         });
 
@@ -124,6 +117,14 @@ public class MControlFragment extends Fragment {
                     int hue = 0;
                     @Override
                     public void run() {
+                        if(!pauseLog) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pauseLogging();
+                                }
+                            });
+                        }
                         while(ledCycling) {
                             hue = (hue + 1) % 360;
                             float[] nums = {hue + 0.0f, 1.0f, 1.0f};
@@ -139,6 +140,19 @@ public class MControlFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    private void pauseLogging() {
+        Button btnPauseLogging = rootView.findViewById(R.id.btnPauseLog);;
+        if (pauseLog) {
+            btnPauseLogging.setText("Pause Logging");
+            saveLogHandler.postDelayed(saveLogRunnable, 0);
+
+        } else {
+            btnPauseLogging.setText("Resume Logging");
+            saveLogHandler.removeCallbacks(saveLogRunnable);
+        }
+        pauseLog = !pauseLog;
     }
 
 
