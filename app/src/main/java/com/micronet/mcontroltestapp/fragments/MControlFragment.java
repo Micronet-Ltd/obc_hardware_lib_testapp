@@ -31,7 +31,7 @@ import static com.micronet.mcontrol.MControl.setSysPropPowerCtlShutdown;
  * A simple {@link Fragment} subclass.
  */
 public class MControlFragment extends Fragment {
-    public static final long LOG_INTERVAL_MS = 30000;
+    public static long LOG_INTERVAL_MS = 30000;
     private final String TAG = "MControlFragment";
     private Handler saveLogHandler = null;
     private boolean writeLogHeader = true;
@@ -99,11 +99,6 @@ public class MControlFragment extends Fragment {
                 Toast.makeText(getContext(), "Device via OS Power Off in 2 Seconds", Toast.LENGTH_SHORT).show();
                 //Shutdown using the OS
                 setSysPropPowerCtlShutdown();
-/*
-                //shutdown via the MCU
-                MControlTextAdapter.mc.set_device_power_off(10);
-                Toast.makeText(getContext(), "Device Power Off in 10 Seconds", Toast.LENGTH_SHORT).show();
-*/
             }
         });
 

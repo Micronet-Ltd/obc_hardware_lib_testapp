@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MControlFragment(), "MCU Control");
         adapter.addFragment(new CanbusFragment(), "Canbus");
-        adapter.addFragment(new AboutFragment(), "About");
+        adapter.addFragment(new AboutFragment(), "Settings");
         viewPager.setAdapter(adapter);
     }
 
