@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.micronet.mcontroltestapp.R;
-import com.micronet.mcontrol.BuildConfig;
+import com.micronet.mcontroltestapp.BuildConfig;
 
 /**
  * Created by brigham.diaz on 10/26/2016.
