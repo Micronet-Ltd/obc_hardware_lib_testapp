@@ -23,6 +23,7 @@ import android.util.Log;
 
 import com.micronet.mcontroltestapp.R;
 import com.micronet.mcontroltestapp.fragments.AboutFragment;
+import com.micronet.mcontroltestapp.fragments.AccelFragment;
 import com.micronet.mcontroltestapp.fragments.CanbusFragment;
 import com.micronet.mcontroltestapp.fragments.MControlFragment;
 
@@ -198,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MControlFragment(), "MCU Control");
+        adapter.addFragment(new AccelFragment(), "Accelerometer");
         adapter.addFragment(new CanbusFragment(), "Canbus");
         adapter.addFragment(new AboutFragment(), "Settings");
         viewPager.setAdapter(adapter);

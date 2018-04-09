@@ -17,6 +17,7 @@ android {
     }
     dependencies {
         compile 'com.android.support:design:26.+'
+        compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     }
     buildTypes {
         release {

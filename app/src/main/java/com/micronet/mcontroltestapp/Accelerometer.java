@@ -2,7 +2,6 @@ package com.micronet.mcontroltestapp;
 
 import android.util.Log;
 
-
 import com.micronet.mcontroltestapp.interfaces.AccelerometerInterface;
 
 import java.io.FileInputStream;
@@ -60,13 +59,17 @@ public class Accelerometer implements AccelerometerInterface {
 //                return;
 //            }
 
-            accel_temp = (short)(((accel_data[9]<<8) | accel_data[8]));
+            if(accel_data[14] != 0 && accel_data[15] != 0) {
+                Log.e("Accelorometer", "accel_data doesn't end in zeroes");
+            }
+
+            accel_temp = (short)(((short)accel_data[9]<<8 | ((short)accel_data[8] & 0x00ff)));
             this.accelData[0] = get_g_val(accel_temp);
 
-            accel_temp = (short)(((accel_data[11]<<8) | accel_data[10]));
+            accel_temp = (short)(((short)accel_data[11]<<8) | ((short)accel_data[10] & 0x00ff));
             this.accelData[1] = get_g_val(accel_temp);
 
-            accel_temp = (short)(((accel_data[13]<<8) | accel_data[12]));
+            accel_temp = (short)(((short)accel_data[13]<<8) | ((short)accel_data[12] & 0x00ff));
             this.accelData[2] = get_g_val(accel_temp);
 
         }catch (FileNotFoundException e){
